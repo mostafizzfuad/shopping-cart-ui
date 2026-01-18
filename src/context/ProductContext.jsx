@@ -4,7 +4,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 const ProductContext = createContext();
 
 // ২. প্রোভাইডার কম্পোনেন্ট তৈরি করা
-const ProductProvider = ({ children }) => {
+export const ProductProvider = ({ children }) => {
 	const [products, setProducts] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
@@ -34,8 +34,6 @@ const ProductProvider = ({ children }) => {
 		</ProductContext.Provider>
 	);
 };
-
-export default ProductProvider;
 
 // ৪. কাস্টম হুক তৈরি করা (সহজে কনটেক্সট ব্যবহার করার জন্য)
 export const useProducts = () => {

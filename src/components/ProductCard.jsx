@@ -1,4 +1,8 @@
+import { useCart } from "../context/CartContext"; // ১. হুক ইমপোর্ট
+
 const ProductCard = ({ product }) => {
+	const { addToCart } = useCart(); // ২. কার্ট কনটেক্সট থেকে ফাংশন বের করা
+
 	return (
 		<div className="bg-white rounded-lg shadow p-4 flex flex-col">
 			<img
@@ -9,6 +13,14 @@ const ProductCard = ({ product }) => {
 			<h2 className="text-xl font-semibold">{product.name}</h2>
 			<p className="text-gray-500 text-sm mb-2">{product.description}</p>
 			<p className="font-bold text-lg">${product.price.toFixed(2)}</p>
+
+			{/* ৩. বাটন যোগ করা */}
+			<button
+				onClick={() => addToCart(product)}
+				className="bg-blue-600 text-white mt-3 px-4 py-2 rounded hover:bg-blue-700 transition cursor-pointer"
+			>
+				Add to Cart
+			</button>
 		</div>
 	);
 };

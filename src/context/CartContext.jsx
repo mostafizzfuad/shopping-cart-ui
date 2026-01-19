@@ -1,13 +1,25 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
 // কনটেক্সট তৈরি
 const CartContext = createContext();
 
 // প্রোভাইডার তৈরি
 export const CartProvider = ({ children }) => {
-	const [cart, setCart] = useState([]);
+	// const [cart, setCart] = useState([]);
 
-	// ১. প্রোডাক্ট যোগ করার লজিক
+	// ১. ইনিশিয়াল লোড
+	const [cart, setCart] = useState(() => {
+		// লোকাল স্টোরেজ থেকে কার্ট ডেটা লোড করা হচ্ছে
+		const storedCart = localStorage.getItem("cart");
+		return storedCart ? JSON.parse(storedCart) : [];
+	});
+
+	// ২. কার্ট আপডেট হলে লোকাল স্টোরেজে সেভ করা
+	useEffect(() => {
+		localStorage.setItem("cart", JSON.stringify(cart));
+	}, [cart]); // যখনই cart পরিবর্তন হবে, এই ইফেক্ট রান করবে
+
+	// প্রোডাক্ট যোগ করার লজিক
 	const addToCart = (product) => {
 		setCart((prevCart) => {
 			// চেক করা হচ্ছে আইটেমটি ইতিমধ্যে আছে কি না
@@ -30,9 +42,21 @@ export const CartProvider = ({ children }) => {
 		});
 	};
 
+	// নির্দিষ্ট আইটেম রিমুভ করার ফাংশন
+	const removeFromCart = (productId) => {
+		setCart((prevCart) => prevCart.filter((item) => item.id !== productId));
+	};
+
+	// পুরো কার্ট খালি করার ফাংশন
+	const clearCart = () => {
+		setCart([]);
+	};
+
 	return (
-		// ২. addToCart ফাংশনটি ভ্যালু হিসেবে পাঠানো হলো
-		<CartContext.Provider value={{ cart, addToCart }}>
+		// নতুন ফাংশনগুলো ভ্যালু হিসেবে পাঠানো হলো
+		<CartContext.Provider
+			value={{ cart, addToCart, removeFromCart, clearCart }}
+		>
 			{children}
 		</CartContext.Provider>
 	);

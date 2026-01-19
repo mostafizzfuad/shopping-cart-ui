@@ -1,15 +1,15 @@
-import { useState } from "react"; // ১. ইমপোর্ট
+import { useState } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import { useCart } from "../context/CartContext";
 
 const Header = () => {
-	const { cart } = useCart();
-	const [showDropdown, setShowDropdown] = useState(false); // ২. স্টেট তৈরি
+	const { cart, removeFromCart, clearCart } = useCart();
+	const [showDropdown, setShowDropdown] = useState(false);
 
 	// reduce মেথড ব্যবহার করে মোট কোয়ান্টিটি হিসাব করা হচ্ছে
 	const itemCount = cart.reduce((acc, item) => acc + item.qty, 0);
 
-	// ৩. টোটাল প্রাইস ক্যালকুলেশন
+	// টোটাল প্রাইস ক্যালকুলেশন
 	const totalPrice = cart
 		.reduce((acc, item) => acc + item.price * item.qty, 0)
 		.toFixed(2);
@@ -19,7 +19,7 @@ const Header = () => {
 			<h1 className="text-2xl font-bold text-blue-600">ShopMate</h1>
 
 			<div className="relative">
-				{/* ৪. বাটন যা ড্রপডাউন ওপেন/ক্লোজ করবে */}
+				{/* বাটন যা ড্রপডাউন ওপেন/ক্লোজ করবে */}
 				<button
 					onClick={() => setShowDropdown(!showDropdown)}
 					className="cursor-pointer"
@@ -34,7 +34,7 @@ const Header = () => {
 					)}
 				</button>
 
-				{/* ৫. ড্রপডাউন মেনু (কন্ডিশনাল রেন্ডারিং) */}
+				{/* ড্রপডাউন মেনু (কন্ডিশনাল রেন্ডারিং) */}
 				{showDropdown && (
 					<div className="absolute right-0 mt-2 w-80 bg-white border rounded shadow-lg z-50">
 						<div className="p-4">
@@ -62,6 +62,17 @@ const Header = () => {
 														{item.qty} × $
 														{item.price}
 													</p>
+													{/* রিমুভ বাটন যোগ করা হলো */}
+													<button
+														onClick={() =>
+															removeFromCart(
+																item.id,
+															)
+														}
+														className="text-sm text-red-500 hover:underline cursor-pointer"
+													>
+														Remove
+													</button>
 												</div>
 											</li>
 										))}
@@ -70,6 +81,13 @@ const Header = () => {
 										<span>Total:</span>
 										<span>${totalPrice}</span>
 									</div>
+									{/* ক্লিয়ার কার্ট বাটন যোগ করা হলো */}
+									<button
+										onClick={clearCart}
+										className="mt-3 w-full bg-red-500 text-white py-1 rounded hover:bg-red-600 transition cursor-pointer"
+									>
+										Clear Cart
+									</button>
 								</div>
 							)}
 						</div>

@@ -41,7 +41,7 @@ Since this project uses a JSON Server backend, you need to run both the server a
 
 ### 1. Clone & Install
 ```bash
-git clone [https://github.com/mostafizzfuad/shopping-cart-ui.git](https://github.com/mostafizzfuad/shopping-cart-ui.git)
+git clone https://github.com/mostafizzfuad/shopping-cart-ui.git
 cd shopping-cart-ui
 npm install
 ```

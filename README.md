@@ -1,16 +1,58 @@
-# React + Vite
+# 🛍️ Shopping Cart UI with React Context API
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A fully functional Shopping Cart application built with **React** to demonstrate global state management using the **Context API**. This project simulates a real-world e-commerce flow using **JSON Server** as a mock backend database.
 
-Currently, two official plugins are available:
+## 🚀 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Based on the modules covered, the project includes:
 
-## React Compiler
+- **Dynamic Product Display:** Fetches product data asynchronously from a JSON server.
+- **Global State Management:** Uses `ProductContext` and `CartContext` to manage application state without prop drilling.
+- **Cart Functionality:**
+  - Add items to the cart.
+  - Real-time cart count badge in the header.
+  - Cart items dropdown preview.
+  - Remove individual items.
+  - Clear the entire cart.
+- **Data Persistence:** Saves cart items to **Local Storage**, so data isn't lost on refresh.
+- **Proxy Setup:** Configured development proxy to communicate seamlessly with the backend.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🛠️ Tech Stack
 
-## Expanding the ESLint configuration
+- **Frontend:** React.js (Hooks & Context API)
+- **Backend:** JSON Server (Mock API)
+- **State Management:** React Context API
+- **Styling:** CSS / Scoped Modules (based on project setup)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 📂 Project Workflow
+
+This project covers the following core concepts:
+1. **Context API Setup:** Understanding the need for global state.
+2. **JSON Server:** Setting up a mock REST API to serve product data.
+3. **Proxy Configuration:** solving CORS issues and simplifying API requests.
+4. **Contexts:**
+   - `ProductContext`: Handles fetching and displaying products.
+   - `CartContext`: Handles cart logic (add, remove, clear, count).
+5. **Local Storage Integration:** Syncing context state with browser storage.
+
+## ⚙️ How to Run Locally
+
+Since this project uses a JSON Server backend, you need to run both the server and the frontend.
+
+### 1. Clone & Install
+```bash
+git clone [https://github.com/mostafizzfuad/shopping-cart-ui.git](https://github.com/mostafizzfuad/shopping-cart-ui.git)
+cd shopping-cart-ui
+npm install
+```
+### 2. Start the Backend (JSON Server)
+```bash
+npm run json-server
+```
+### 3. Start the Frontend (React App)
+```bash
+npm run dev
+```
+
+# 👨‍💻Author
+[Md. Mostafizur Rahman](https://www.linkedin.com/in/mostafizzfuad/) - Full Stack Developer
